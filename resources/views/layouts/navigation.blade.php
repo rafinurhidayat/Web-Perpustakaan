@@ -13,6 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                  <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+<<<<<<< HEAD
                      {{ __('Dashboard') }}
                          </x-nav-link>
 
@@ -20,6 +21,16 @@
                     {{ __('Buku') }}
                          </x-nav-link>
                 </div>
+=======
+                       {{ __('Dashboard') }}
+                 </x-nav-link>
+
+                <x-nav-link :href="route('anggota.index')" :active="request()->routeIs('anggota.*')">
+                        {{ __('Anggota') }}
+                 </x-nav-link>
+            </div>
+>>>>>>> 715afd8e830119d6f1af8fb1f1ba4ecc1eaa919d
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
