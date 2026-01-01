@@ -13,6 +13,15 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                  <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+<<<<<<< HEAD
+                     {{ __('Dashboard') }}
+                         </x-nav-link>
+
+                 <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.*')">
+                    {{ __('Buku') }}
+                         </x-nav-link>
+                </div>
+=======
                        {{ __('Dashboard') }}
                  </x-nav-link>
 
@@ -20,6 +29,7 @@
                         {{ __('Anggota') }}
                  </x-nav-link>
             </div>
+>>>>>>> 715afd8e830119d6f1af8fb1f1ba4ecc1eaa919d
 
 
             <!-- Settings Dropdown -->
@@ -69,12 +79,16 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div>
+    <div class="pt-2 pb-3 space-y-1">
+    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+        {{ __('Dashboard') }}
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link :href="route('books.index')" :active="request()->routeIs('books.*')">
+        {{ __('Buku') }}
+    </x-responsive-nav-link>
+</div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

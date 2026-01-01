@@ -1,10 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
+<<<<<<< HEAD
+        <h2 class="font-semibold text-xl">
+=======
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+>>>>>>> 715afd8e830119d6f1af8fb1f1ba4ecc1eaa919d
             Dashboard
         </h2>
     </x-slot>
 
+<<<<<<< HEAD
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-white p-6 rounded shadow">
+                Selamat datang di sistem perpustakaan
+=======
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
@@ -27,6 +37,7 @@
                     </div>
 
                 </div>
+>>>>>>> 715afd8e830119d6f1af8fb1f1ba4ecc1eaa919d
             </div>
         </div>
     </div>
