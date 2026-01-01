@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\Loan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+use App\Models\Loan;
+use App\Models\Anggota;
 
 class User extends Authenticatable
 {
@@ -15,6 +17,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     protected $hidden = [
@@ -30,8 +33,15 @@ class User extends Authenticatable
         ];
     }
 
+    // 🔗 USER → LOANS
     public function loans()
     {
         return $this->hasMany(Loan::class);
+    }
+
+    // 🔗 USER → ANGGOTA
+    public function anggota()
+    {
+        return $this->hasOne(Anggota::class);
     }
 }
