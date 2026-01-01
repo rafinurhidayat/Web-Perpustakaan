@@ -14,10 +14,17 @@
                         Menu Utama
                     </h3>
 
-                    <a href="{{ route('anggota.index') }}"
-                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow">
-                        📋 Data Anggota
-                    </a>
+                    <div class="flex gap-4">
+                        <a href="{{ route('anggota.index') }}"
+                           class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg shadow">
+                            📋 Data Anggota
+                        </a>
+
+                        <a href="{{ route('peminjaman.index') }}"
+                           class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-lg shadow">
+                            📚 Peminjaman Buku
+                        </a>
+                    </div>
 
                 </div>
             </div>
