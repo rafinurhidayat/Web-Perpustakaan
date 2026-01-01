@@ -1,51 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-6 max-w-xl mx-auto text-white">
-    <h1 class="text-2xl font-bold mb-6">Edit Anggota</h1>
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-4 text-white">Data Anggota</h1>
 
-    <form action="{{ route('anggota.update', $anggota->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-        <div class="mb-4">
-            <label>Nama</label>
-            <input type="text" name="nama"
-                value="{{ old('nama', $anggota->nama) }}"
-                class="w-full px-3 py-2 text-black rounded">
+    @if (session('success'))
+        <div class="mb-4 bg-green-600 text-white px-4 py-2 rounded">
+            {{ session('success') }}
         </div>
+    @endif
 
-        <div class="mb-4">
-            <label>No Anggota</label>
-            <input type="text" name="no_anggota"
-                value="{{ old('no_anggota', $anggota->no_anggota) }}"
-                class="w-full px-3 py-2 text-black rounded">
-        </div>
+    <div class="mb-6">
+        <a href="{{ route('anggota.create') }}"
+           class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+            + Tambah Anggota
+        </a>
+    </div>
 
-        <div class="mb-4">
-            <label>Alamat</label>
-            <textarea name="alamat"
-                class="w-full px-3 py-2 text-black rounded">{{ old('alamat', $anggota->alamat) }}</textarea>
-        </div>
+    <table class="w-full border border-gray-700 text-white">
+        <thead class="bg-gray-800">
+            <tr>
+                <th class="border px-4 py-2">No</th>
+                <th class="border px-4 py-2">Nama</th>
+                <th class="border px-4 py-2">No Anggota</th>
+                <th class="border px-4 py-2">Alamat</th>
+                <th class="border px-4 py-2">No HP</th>
+                <th class="border px-4 py-2">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($anggotas as $index => $anggota)
+            <tr class="hover:bg-gray-700">
+                <td class="border px-4 py-2">{{ $index + 1 }}</td>
+                <td class="border px-4 py-2">{{ $anggota->nama }}</td>
+                <td class="border px-4 py-2">{{ $anggota->no_anggota }}</td>
+                <td class="border px-4 py-2">{{ $anggota->alamat }}</td>
+                <td class="border px-4 py-2">{{ $anggota->no_hp }}</td>
+                <td class="border px-4 py-2 flex gap-2">
+                    <a href="{{ route('anggota.edit', $anggota->id) }}"
+                       class="bg-yellow-500 px-3 py-1 rounded text-sm">
+                        Edit
+                    </a>
 
-        <div class="mb-4">
-            <label>No HP</label>
-            <input type="text" name="no_hp"
-                value="{{ old('no_hp', $anggota->no_hp) }}"
-                class="w-full px-3 py-2 text-black rounded">
-        </div>
-
-        <div class="flex gap-3">
-            <button type="submit"
-                class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded">
-                Update
-            </button>
-
-            <a href="{{ route('anggota.index') }}"
-               class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded">
-                Kembali
-            </a>
-        </div>
-    </form>
+                    <form action="{{ route('anggota.destroy', $anggota->id) }}"
+                          method="POST"
+                          onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="bg-red-600 px-3 py-1 rounded text-sm text-white">
+                            Hapus
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection
