@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggota;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnggotaController extends Controller
 {
     public function index()
     {
-        $anggotas = Anggota::all();
+        $anggotas = Anggota::latest()->get();
         return view('anggota.index', compact('anggotas'));
     }
 
@@ -20,19 +21,19 @@ class AnggotaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'no_anggota' => 'required|unique:anggotas',
-            'alamat' => 'required',
-            'no_hp' => 'required',
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'no_anggota' => 'required|unique:anggotas,no_anggota',
+            'alamat' => 'required|string',
+            'no_hp' => 'required|string|max:15',
         ]);
 
         Anggota::create([
-            'nama' => $request->nama,
-            'no_anggota' => $request->no_anggota,
-            'alamat' => $request->alamat,
-            'no_hp' => $request->no_hp,
-            'user_id' => auth()->id()
+            'nama' => $validated['nama'],
+            'no_anggota' => $validated['no_anggota'],
+            'alamat' => $validated['alamat'],
+            'no_hp' => $validated['no_hp'],
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('anggota.index')
@@ -46,14 +47,13 @@ class AnggotaController extends Controller
 
     public function update(Request $request, Anggota $anggota)
     {
-        $request->validate([
-            'nama' => 'required',
-            'no_anggota' => 'required|unique:anggotas,no_anggota,' . $anggota->id,
-            'alamat' => 'required',
-            'no_hp' => 'required',
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string',
+            'no_hp' => 'required|string|max:15',
         ]);
 
-        $anggota->update($request->all());
+        $anggota->update($validated);
 
         return redirect()->route('anggota.index')
             ->with('success', 'Data anggota berhasil diperbarui');

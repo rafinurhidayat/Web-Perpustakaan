@@ -9,7 +9,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::all();
+        $books = Book::latest()->get();
         return view('books.index', compact('books'));
     }
 
@@ -21,10 +21,11 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'judul' => 'required',
-            'penulis' => 'required',
-            'penerbit' => 'required',
+            'judul' => 'required|string|max:255',
+            'penulis' => 'required|string|max:255',
+            'penerbit' => 'required|string|max:255',
             'tahun_terbit' => 'required|numeric',
+            'stok' => 'required|numeric|min:0',
         ]);
 
         Book::create($validated);
@@ -46,16 +47,17 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $validated = $request->validate([
-            'judul' => 'required',
-            'penulis' => 'required',
-            'penerbit' => 'required',
+            'judul' => 'required|string|max:255',
+            'penulis' => 'required|string|max:255',
+            'penerbit' => 'required|string|max:255',
             'tahun_terbit' => 'required|numeric',
+            'stok' => 'required|numeric|min:0',
         ]);
 
         $book->update($validated);
 
         return redirect()->route('books.index')
-            ->with('success', 'Buku berhasil diupdate');
+            ->with('success', 'Buku berhasil diperbarui');
     }
 
     public function destroy(Book $book)
